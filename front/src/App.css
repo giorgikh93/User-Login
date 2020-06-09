@@ -1,0 +1,82 @@
+
+body{
+    background-color: #222831;
+}
+*{
+    box-sizing: border-box;
+}
+
+
+.register h1{
+    color: white;
+}
+.registration-form{
+    height: 250px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+}
+
+input{
+    outline: none;
+    border: none;
+    padding: 9px;
+    width: 250px;
+}
+select{
+    padding: 9px;
+    outline: none;
+}
+.button{
+    display: flex;
+    justify-content: center;
+}
+button{
+    width: 100px;
+    padding: 7px;
+    color: black;
+    font-weight: bold;
+    border:none;
+    outline: none;
+    background-color: white;
+    cursor: pointer;
+}
+
+.header{
+    display: flex;
+    float:right;
+    color: white;
+    padding-right: 10px;
+    cursor: pointer;
+}
+.fa.fa-sign-in{
+    padding-right: 10px;
+}
+
+a{
+    color: white;
+    outline: none;
+    text-decoration: none;
+}
+
+.bodyWrapper{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 200px;
+}
+.login h1{
+    color: white;
+    font-weight: bold;
+    text-align: center;
+}
+
+.login form{
+    display: flex;
+    flex-direction: column;
+    height: 120px;
+    justify-content: space-between;
+    align-items: center;
+}
