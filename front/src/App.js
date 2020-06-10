@@ -1,32 +1,35 @@
-import React from 'react';
-import Main from './Main'
+import React, { useContext } from 'react';
 import { Switch, Route } from 'react-router-dom'
 import Registration from './Registration'
-import Header from './Header'
 import Login from './Login'
 import Private from './Private'
+import { AnimatePresence } from 'framer-motion'
+import { Consumer } from './useLoggin'
 import './App.css'
 
 
 function App() {
+  const { user } = useContext(Consumer)
   return (
     <>
-    <Header/>
-    <div className='bodyWrapper'>
-        <Switch>
-                <Route exact path='/'>
-                    <Registration/>
-                </Route>
-                <Route path='/login'>
-                  <Login/>
-                </Route>
-                <Route path='/private'>
-                  <Private/>
-                </Route>
-            </Switch>
-    </div>
-
-    {/* <Main/> */}
+      <div className='bodyWrapper'>
+        <AnimatePresence>
+          <Switch>
+            <Route exact path='/'>
+              <Login />
+            </Route>
+            <Route path='/login'>
+              <Login />
+            </Route>
+            <Route path='/registration'>
+              <Registration />
+            </Route>
+            <Route path={`/private/${user.name}${user.surname}`}>
+              <Private />
+            </Route>
+          </Switch>
+        </AnimatePresence>
+      </div>
     </>
   );
 }

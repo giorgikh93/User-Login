@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom'
 
 function Header() {
@@ -6,7 +6,7 @@ function Header() {
         <>
             <div className='header'>
                 <i className="fa fa-sign-in" aria-hidden="true"></i>
-                <Link to='/login'><span >LOGIN</span></Link>
+                <Link to='/'><span >LOGIN</span></Link>
             </div>
         </>
     )
