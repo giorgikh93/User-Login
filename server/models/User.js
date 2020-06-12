@@ -25,6 +25,9 @@ class User {
             console.log('successfully saved')
         })
     }
+    getAllUser(){
+        return this.users
+    }
 
     addUser(user) {
         this.users.push(user)
@@ -39,13 +42,38 @@ class User {
             return user
         }
     }
-    deleteUser(email){
+    deleteUser(email) {
         let idx = this.users.findIndex(item => item.email === email)
-        this.users.splice(idx,1)
+        this.users.splice(idx, 1)
         this.commit()
     }
+    addFile(file, user) {
+        if (!user.album) {
+            user['album'] = [{ file, like: 0, comments: 0 }]
+        } else {
+            user.album.push({ file, like: 0, comments: 0 })
+
+        }
+        this.commit()
+    }
+
+    deleteFile(user, img) {
+        let usr = this.users.find(item=>item.email === user.email)
+        let idx = usr.album.findIndex(({file})=>file===img)
+        usr.album.splice(idx,1)
+        this.commit()
+    }
+
+    addLikes(user, img) {
+        for (let i of user.album) {
+            if (i.file === img) {
+                i.like += 1
+            }
+        }
+        this.commit()
+    }
+
+
 }
-
-
 
 module.exports = User
