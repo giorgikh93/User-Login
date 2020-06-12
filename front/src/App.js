@@ -5,7 +5,10 @@ import Login from './Login'
 import Private from './Private'
 import { AnimatePresence } from 'framer-motion'
 import { Consumer } from './useLoggin'
+import './reset.css'
 import './App.css'
+
+
 
 
 function App() {

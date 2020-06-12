@@ -42,7 +42,6 @@ function ContextProvider(props) {
                 }
             })
     }
-
     useEffect(() => {
         Axios.get(LOGIN_URL)
             .then(res => {
@@ -50,6 +49,7 @@ function ContextProvider(props) {
                     return <Redirect to='/' />
                 }
                 setUser(res.data)
+                setLoggedIn(true)
             })
     }, [])
 

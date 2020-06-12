@@ -16,6 +16,9 @@ body{
 }
 .register h1{
     color: white;
+    font-size: 30px;
+    padding-bottom: 20px;
+    font-weight: bold;
  
     
 }
@@ -51,13 +54,16 @@ button{
     background-color: white;
     cursor: pointer;
 }
-
-.header{
+.headerRegistration{
     display: flex;
-    float:right;
     color: white;
-    padding-right: 10px;
+    justify-content:flex-end;
+    padding: 15px;
+    font-size: 20px;
     cursor: pointer;
+    background-color:	#0f4539;
+    color: white;
+    width: 100%;
 }
 .fa.fa-sign-in{
     padding-right: 10px;
@@ -76,6 +82,8 @@ a{
     color: white;
     font-weight: bold;
     text-align: center;
+    font-size: 30px;
+    padding-bottom: 20px;
 }
 
 .login form{
@@ -97,12 +105,7 @@ a{
     cursor: pointer;
 }
 
-.private{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    color: white;
-}
+
 .private a{
     padding-right: 20px;
 }
@@ -113,4 +116,131 @@ button:disabled{
 
 .none{
     display: none;
+}
+
+.flex{
+    display: flex;
+}
+.menu{
+    flex-direction: column;
+    position: absolute;
+    right: 0;
+    top: 54px;
+}
+.menu button{
+    margin-top: 20px;
+}
+
+.fa.fa-sort-desc{
+    padding-right: 20px;
+    position: relative;
+    cursor: pointer;
+}
+
+.react-confirm-alert-body{
+    text-align: center;
+    color: white;
+    font-size: 20px;
+}
+.react-confirm-alert-body h1{
+    font-size: 30px;
+    font-weight: bold;
+    padding: 25px 0;
+}
+.react-confirm-alert-button-group{
+    padding: 25px 0;
+}
+.react-confirm-alert-button-group button{
+    margin-right: 10px;
+}
+
+.headerPrivate{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: 	#0f4539;
+    font-size: 20px;
+    padding: 20px;
+    color: white;
+}
+.headerPrivate h1{
+    font-weight: bold;
+    font-size: 30px;
+
+}
+.fa.fa-sign-in{
+    color: white;
+}
+.yes{
+    background-color: red;
+    color: white;
+    outline: none;
+    border: none;
+}
+.no{
+    background-color: green;
+    color: white;
+    outline: none;
+    border: none;
+}
+
+
+.form{
+    display: flex;
+    padding: 56px 8px;
+
+}
+.fileUploadForm{
+font-size: 16px;
+outline: none;
+border: none;
+
+}
+.img{
+    width: 200px;
+    height: 200px;
+}
+.img img{
+    width: 100%;
+    height: 100%;
+}
+
+.albumWrapper{
+    display: flex;
+    flex-direction: column;
+    
+}
+
+.album{
+    padding:20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 242px);
+    grid-gap:60px}
+.like{
+    padding:10px 0;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+}
+.fa.fa-thumbs-o-up{
+    cursor: pointer;
+}
+
+.delete{
+    cursor: pointer;
+    width: 100%;
+    background-color: #0f4539;
+    color: white;
+    transition: .2s
+}
+.delete:hover{
+    background-color: red;
+}
+.imgWrapper{
+    height:250px
+}
+.results{
+    display: flex;
+    flex-direction: column;
 }
