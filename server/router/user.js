@@ -18,7 +18,6 @@ router.use(session({
 }))
 
 const multer = require('multer');
-const e = require('express');
 
 const imageName = Date.now() + '-';
 
@@ -39,6 +38,7 @@ const users = new User()
 
 router.route('/upload').post((req, res) => {
     upload(req, res, function (err) {
+        console.log(req.file)
         if (err instanceof multer.MulterError) {
             return res.status(500).json(err)
         } else if (err) {
@@ -106,23 +106,21 @@ router.route('/login').post(async (req, res) => {
 })
 
 
-router.route('/like/').post((req,res)=>{
-
+router.route('/like').post((req,res)=>{
     const usr = users.getUser(req.body.email)
     users.addLikes(usr,req.body.img)
-
     let user = users.getUser(usr.email)
     req.session.album =user
-    res.send(user.album)
+    res.send(user)
 })
 
 router.route('/search').get((req,res)=>{
     const email = req.query.email.toLowerCase()
     const userList = users.getAllUser()
-    let usr;
+    let usr =[]
     for(let i of userList){
-        if(i.email.toLowerCase().indexOf(email) !== false){
-               usr = i.email
+        if(i.email.toLowerCase().indexOf(email) !== -1){
+             usr.push(i.email)
         }
     }
     res.send(usr)
@@ -154,6 +152,17 @@ router.route('/delete/:email').delete((req, res) => {
     users.deleteUser(req.params.email)
     req.session.destroy()
     res.json('Your account deleted successfully').status(200)
+})
+
+router.route('/searchByEmail').get((req,res)=>{
+    const email = req.query.email
+    res.send(email)
+})
+
+
+router.route('/user').get((req,res)=>{
+   const user =  users.getUser(req.query.email)
+    res.send(user)
 })
 
 module.exports = router
