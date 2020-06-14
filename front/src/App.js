@@ -5,6 +5,8 @@ import Login from './Login'
 import Private from './Private'
 import { AnimatePresence } from 'framer-motion'
 import { Consumer } from './useLoggin'
+import HeaderPrivate from './HeaderPrivate'
+import PersonalPage from './PersonalPage'
 import './reset.css'
 import './App.css'
 
@@ -12,7 +14,9 @@ import './App.css'
 
 
 function App() {
-  const { user } = useContext(Consumer)
+  const { user, personal } = useContext(Consumer)
+
+
   return (
     <>
       <div className='bodyWrapper'>
@@ -28,7 +32,12 @@ function App() {
               <Registration />
             </Route>
             <Route path={`/private/${user.name}${user.surname}`}>
+            <HeaderPrivate/>
               <Private />
+            </Route>
+            <Route path={`/${personal}`}>
+              <HeaderPrivate />
+              <PersonalPage />
             </Route>
           </Switch>
         </AnimatePresence>

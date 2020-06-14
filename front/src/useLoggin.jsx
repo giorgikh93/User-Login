@@ -12,11 +12,14 @@ function ContextProvider(props) {
     const [loggedIn, setLoggedIn] = useState(false)
     const [user, setUser] = useState('')
     const [unKnownUser, setUnknownUser] = useState('')
+    const [personal,setPersonal] = useState('')
+    const [confirmation,setConfirmation] = useState(false)
+    const [search, setSearch] = useState('')
 
     const unknownRef = useRef()
 
 
-    function reset(){
+    function reset() {
         setEmail('')
         setPassword('')
     }
@@ -53,6 +56,15 @@ function ContextProvider(props) {
             })
     }, [])
 
+    function handleRedirect(email) {
+    
+        Axios.get(`http://localhost:5000/searchByEmail/?email=${email}`)
+            .then(res => setPersonal(res.data))
+            .then(setSearch(''))
+    }
+    const SERVER_PATH = 'http://localhost:5000/'
+
+
     return (
         <Context.Provider value={{
             setEmail,
@@ -61,10 +73,10 @@ function ContextProvider(props) {
             setLoggedIn,
             handleLogin,
             email,
-            password,
-            user,
-            unKnownUser,
-            unknownRef
+            password,confirmation,setConfirmation,
+            user,SERVER_PATH,
+            unKnownUser,search,setSearch,
+            unknownRef, handleRedirect,personal
         }}>
             {props.children}
         </Context.Provider>

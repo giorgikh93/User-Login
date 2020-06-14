@@ -139,11 +139,11 @@ button:disabled{
 
 .react-confirm-alert-body{
     text-align: center;
-    color: white;
+    color: black;
     font-size: 20px;
 }
 .react-confirm-alert-body h1{
-    font-size: 30px;
+    font-size: 35px;
     font-weight: bold;
     padding: 25px 0;
 }
@@ -220,8 +220,20 @@ border: none;
 .like{
     padding:10px 0;
     color: white;
+    display: none;
+    justify-content: center;
+}
+.like2{
+    padding:10px 0;
+    color: white;
     display: flex;
     justify-content: space-between;
+}
+.imgWrapper:hover .like{
+    display: flex;
+}
+.imgWrapper:hover .delete{
+    display:block;
 }
 .fa.fa-thumbs-o-up{
     cursor: pointer;
@@ -232,15 +244,35 @@ border: none;
     width: 100%;
     background-color: #0f4539;
     color: white;
-    transition: .2s
+    transition: .2s;
+    display: none;
 }
 .delete:hover{
     background-color: red;
 }
 .imgWrapper{
-    height:250px
+    height:250px;
+    cursor:pointer;
 }
+.search{
+    position: relative;
+}
+
 .results{
+    position: absolute;
     display: flex;
     flex-direction: column;
+    padding: 10px 0;
+    cursor: pointer;
+}
+.opacity{
+    opacity: 0.1;
+}
+#react-confirm-alert{
+    transform: translate(-50%, -50%);
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    background-color: #f4f4f4;
+    padding: 20px;
 }
