@@ -67,7 +67,7 @@ router.route('/upload/:email').get((req, res) => {
     req.session.album = usr
     res.send(usr.album)
 
-})  
+})
 
 router.route('/register').post(async (req, res) => {
     let usr = users.getUser(req.body.email)
@@ -106,30 +106,41 @@ router.route('/login').post(async (req, res) => {
 })
 
 
-router.route('/like').post((req,res)=>{
+router.route('/like').post((req, res) => {
+    const likePerson = req.body.user.email
     const usr = users.getUser(req.body.email)
-    users.addLikes(usr,req.body.img)
+    const file = req.body.img
+    users.addLikes(usr, file, likePerson)
     let user = users.getUser(usr.email)
-    req.session.album =user
-    res.send(user)
+    req.session.album = user
+    for (let i of user.album) {
+        if (i.file === file) {
+            res.send(i).status(200)
+        }
+    }
+})
+router.route('/likes').get((req, res) => {
+    const email = req.query.email
+    const usr = email !== undefined ? users.getUser(email) : ''
+    res.send(usr.album)
 })
 
-router.route('/search').get((req,res)=>{
+router.route('/search').get((req, res) => {
     const email = req.query.email.toLowerCase()
     const userList = users.getAllUser()
-    let usr =[]
-    for(let i of userList){
-        if(i.email.toLowerCase().indexOf(email) !== -1){
-             usr.push(i.email)
+    let usr = []
+    for (let i of userList) {
+        if (i.email.toLowerCase().indexOf(email) !== -1) {
+            usr.push(i.email)
         }
     }
     res.send(usr)
 })
 
-router.route('/deleteImg').delete((req,res)=>{
+router.route('/deleteImg').delete((req, res) => {
     const user = req.body.user;
     const img = req.body.img;
-    users.deleteFile(user,img)
+    users.deleteFile(user, img)
     let usr = users.getUser(user.email)
     res.send(usr.album)
 })
@@ -154,14 +165,14 @@ router.route('/delete/:email').delete((req, res) => {
     res.json('Your account deleted successfully').status(200)
 })
 
-router.route('/searchByEmail').get((req,res)=>{
+router.route('/searchByEmail').get((req, res) => {
     const email = req.query.email
     res.send(email)
 })
 
 
-router.route('/user').get((req,res)=>{
-   const user =  users.getUser(req.query.email)
+router.route('/user').get((req, res) => {
+    const user = users.getUser(req.query.email)
     res.send(user)
 })
 

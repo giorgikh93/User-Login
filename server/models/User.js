@@ -49,9 +49,9 @@ class User {
     }
     addFile(file, user) {
         if (!user.album) {
-            user['album'] = [{ file, like: 0, comments: 0 }]
+            user['album'] = [{ file, like: [], comments: 0 }]
         } else {
-            user.album.push({ file, like: 0, comments: 0 })
+            user.album.push({ file, like: [], comments: 0 })
 
         }
         this.commit()
@@ -64,10 +64,11 @@ class User {
         this.commit()
     }
 
-    addLikes(user, img) {
+    addLikes(user, img,likePerson) {
         for (let i of user.album) {
             if (i.file === img) {
-                i.like += 1
+                // i.like += 1
+                i.like.push(likePerson)
             }
         }
         this.commit()
