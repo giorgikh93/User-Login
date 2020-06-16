@@ -9,8 +9,7 @@ function Private() {
     const [file, setFile] = useState(null)
     const [img, setImg] = useState([])
 
-
-
+    
     const SERVER_PATH = 'http://localhost:5000/'
 
 
@@ -51,14 +50,13 @@ function Private() {
         <div key={index} className='imgWrapper' >
             <div className='img'><img src={`${SERVER_PATH}pictures/${img.file}`} alt='img' />
                 <div className='like ' >
-                    <div>{img.like === 0 ? 'There is no likes yet' :  `${img.like} person likes this photo `}</div>
+                    <div>{img.like.length === 0 ? 'There is no likes yet' :  `${img.like.length} person likes this photo `}</div>
                 </div>
                 <button className='delete' onClick={() => handleImgDelete(img.file)}> Delete</button>
             </div>
         </div>) : ''
-
     return (
-        !loggedIn ? <Redirect to='/' /> :
+        !loggedIn || !user.name ? <Redirect to='/' /> :
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className='private'>
                 <div className={`albumWrapper ${confirmation ? 'opacity' : ''}`}>
                     <div className='album'>

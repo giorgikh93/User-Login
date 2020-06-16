@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Consumer } from './useLoggin'
 import { useContext } from 'react'
 import Axios from 'axios'
-import { Link, } from 'react-router-dom'
+import { Link,  } from 'react-router-dom'
 import { confirmAlert } from 'react-confirm-alert';
 
 function HeaderPrivate() {
@@ -59,7 +59,8 @@ function HeaderPrivate() {
     }
     const resultList = results.map((item, index) => <Link key={index} to={`/${(item)}`} onClick={() => handleRedirect(item)}>{item}</Link>)
     return (
-        <>
+     
+      <> 
             <div className='headerPrivate'>
                 <Link to={`/private/${user.name}${user.surname}`}> <h1>Welcome {user.name} {user.surname} !</h1></Link>
                 <div className='search'>

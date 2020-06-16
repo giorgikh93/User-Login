@@ -12,8 +12,8 @@ function ContextProvider(props) {
     const [loggedIn, setLoggedIn] = useState(false)
     const [user, setUser] = useState('')
     const [unKnownUser, setUnknownUser] = useState('')
-    const [personal,setPersonal] = useState('')
-    const [confirmation,setConfirmation] = useState(false)
+    const [personal, setPersonal] = useState('')
+    const [confirmation, setConfirmation] = useState(false)
     const [search, setSearch] = useState('')
 
     const unknownRef = useRef()
@@ -46,18 +46,22 @@ function ContextProvider(props) {
             })
     }
     useEffect(() => {
+        let isSubscribed = true
         Axios.get(LOGIN_URL)
             .then(res => {
-                if (!res.data) {
-                    return <Redirect to='/' />
+                if (isSubscribed) {
+                    if (res.data === 'Unknown user') {
+                        return <Redirect to='/' />
+                    } else if (res.data !== 'Unknown user') {
+                        setUser(res.data)
+                        setLoggedIn(true)
+                    }
                 }
-                setUser(res.data)
-                setLoggedIn(true)
             })
+        return () => isSubscribed = false
     }, [])
-
     function handleRedirect(email) {
-    
+
         Axios.get(`http://localhost:5000/searchByEmail/?email=${email}`)
             .then(res => setPersonal(res.data))
             .then(setSearch(''))
@@ -73,10 +77,10 @@ function ContextProvider(props) {
             setLoggedIn,
             handleLogin,
             email,
-            password,confirmation,setConfirmation,
-            user,SERVER_PATH,
-            unKnownUser,search,setSearch,
-            unknownRef, handleRedirect,personal
+            password, confirmation, setConfirmation,
+            user, SERVER_PATH,
+            unKnownUser, search, setSearch,
+            unknownRef, handleRedirect, personal
         }}>
             {props.children}
         </Context.Provider>
