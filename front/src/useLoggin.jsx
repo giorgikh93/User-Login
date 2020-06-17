@@ -50,12 +50,11 @@ function ContextProvider(props) {
         Axios.get(LOGIN_URL)
             .then(res => {
                 if (isSubscribed) {
-                    if (res.data === 'Unknown user') {
+                    if (!res.data) {
                         return <Redirect to='/' />
-                    } else if (res.data !== 'Unknown user') {
+                    } 
                         setUser(res.data)
-                        setLoggedIn(true)
-                    }
+                        setLoggedIn(true)    
                 }
             })
         return () => isSubscribed = false

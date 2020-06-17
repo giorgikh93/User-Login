@@ -27,7 +27,6 @@ function PersonalPage() {
     }
 
 
-
     function like(file) {
         for (let i of likesArr) {
             if (i.file === file) {
@@ -41,15 +40,16 @@ function PersonalPage() {
             }
         }
     }
+
+
     const images = imgs().map((item, index) => <div key={index} className='imgWrapper2'>
         <div className='img'>
             <img src={`http://localhost:5000/pictures/${item.file}`} alt='img' />
             <div className='like2'>
-                {!like(item.file) ? <i onClick={() => handleLike(item.file)} className="fa fa-thumbs-o-up" aria-hidden="true"></i> :
-                    <>
-                        <i className="fa fa-thumbs-up " aria-hidden="true"  onClick={() => handleLike(item.file)}></i>
-                        <span>{item.like.length}</span>
-                    </>}
+                {!like(item.file) ? <i onClick={() => handleLike(item.file)} className="fa fa-thumbs-o-up" aria-hidden="true"></i>
+                    : <i className="fa fa-thumbs-up " aria-hidden="true"></i>
+                }
+                <span>{item.like.length}</span>
             </div>
         </div>
     </div>)
@@ -61,7 +61,9 @@ function PersonalPage() {
             img: img
         }
         Axios.post(`${SERVER_PATH}like`, data)
-            .then(res => setLikesArr(prev => [...prev, res.data]))
+            .then(res => {
+                setLikesArr(prev => [...prev, res.data])
+            })
     }
     return (
         !usr ? '' :
